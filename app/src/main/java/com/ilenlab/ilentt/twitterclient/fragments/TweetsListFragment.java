@@ -21,6 +21,7 @@ import com.ilenlab.ilentt.twitterclient.activities.ProfileActivity;
 import com.ilenlab.ilentt.twitterclient.adapters.TweetAdapter;
 import com.ilenlab.ilentt.twitterclient.models.Tweets;
 import com.ilenlab.ilentt.twitterclient.models.User;
+import com.ilenlab.ilentt.twitterclient.network.TwitterApplication;
 import com.ilenlab.ilentt.twitterclient.network.TwitterClient;
 import com.ilenlab.ilentt.twitterclient.utils.EndlessRecyclerViewScrollListener;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -75,7 +76,7 @@ public abstract class TweetsListFragment extends Fragment {
             }
         });
 
-        // null pointer exception - fixing
+        // null pointer exception - fixed
         adapter.setOnItemClickListener(new TweetAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -90,6 +91,23 @@ public abstract class TweetsListFragment extends Fragment {
         });
 
         return v;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // create the ArrayList (data source)
+        tweets = new ArrayList<>();
+        // construct the adapter from the data source
+        adapter = new TweetAdapter(tweets);
+        client = TwitterApplication.getRestClient();
+        // get some account info
+        client.getMyUserInfo(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                user = User.fromJSON(response);
+            }
+        });
     }
 
     private void showTweetDetailDialog(int position) {
