@@ -75,6 +75,7 @@ public abstract class TweetsListFragment extends Fragment {
             }
         });
 
+        // null pointer exception - fixing
         adapter.setOnItemClickListener(new TweetAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
