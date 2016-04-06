@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.ilenlab.ilentt.twitterclient.R;
 import com.ilenlab.ilentt.twitterclient.models.Tweets;
 import com.ilenlab.ilentt.twitterclient.utils.TimeFormat;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -63,8 +63,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
         ImageView ivAvatar = holder.ivAvatar;
         ivAvatar.setTag(tweet.getUser().getScreenName());
-        //Picasso.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).fit().centerCrop().into(ivAvatar);
-        Glide.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).fitCenter().centerCrop().into(ivAvatar);
+        Picasso.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).fit().centerCrop().into(ivAvatar);
+        //Glide.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivAvatar);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
