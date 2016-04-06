@@ -64,7 +64,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         ImageView ivAvatar = holder.ivAvatar;
         ivAvatar.setTag(tweet.getUser().getScreenName());
         //Picasso.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).fit().centerCrop().into(ivAvatar);
-        Glide.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivAvatar);
+        Glide.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).fitCenter().centerCrop().into(ivAvatar);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
